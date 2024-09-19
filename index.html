@@ -140,8 +140,6 @@
   </script>
   <script>
     // Get the model-viewer element
-const modelViewer = document.querySelector('model-viewer');
-
 // Function to get URL parameters
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -150,12 +148,29 @@ function getUrlParameter(name) {
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
 
-// Get the 'src' parameter from the URL
-const modelSrc = getUrlParameter('src');
+// Function to initialize the model viewer
+function initializeModelViewer() {
+    // Get the model-viewer element
+    const modelViewer = document.querySelector('model-viewer');
 
-// If a 'src' parameter is provided, update the model-viewer's src
-if (modelSrc) {
-    modelViewer.src = modelSrc;
+    if (modelViewer) {
+        // Get the 'src' parameter from the URL
+        const modelSrc = getUrlParameter('src');
+
+        // If a 'src' parameter is provided, update the model-viewer's src
+        if (modelSrc) {
+            modelViewer.src = modelSrc;
+        }
+    } else {
+        console.error('model-viewer element not found');
+    }
+}
+
+// Run the initialization function after the DOM is fully loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeModelViewer);
+} else {
+    initializeModelViewer();
 }
   </script>
 </body>
