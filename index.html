@@ -138,5 +138,25 @@
   <script type="module"
       src="model-viewer.min.js">
   </script>
+  <script>
+    // Get the model-viewer element
+const modelViewer = document.querySelector('model-viewer');
+
+// Function to get URL parameters
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+// Get the 'src' parameter from the URL
+const modelSrc = getUrlParameter('src');
+
+// If a 'src' parameter is provided, update the model-viewer's src
+if (modelSrc) {
+    modelViewer.src = modelSrc;
+}
+  </script>
 </body>
 </html>
